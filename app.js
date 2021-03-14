@@ -54,7 +54,7 @@ updateScore=()=>{
 }
 ButtonClick=()=>{
     var runs = score[Math.floor(Math.random()*score.length)];
-    runs=(runs==0?"M":"G");
+    runs=(runs==0?0:1);
     if(toss==1){
         team1.runs.push(runs);
         team1.score = calculateScore(team1.runs);
@@ -70,20 +70,20 @@ updateScore();
  }
  calculateScore=(runs)=>{
     return runs.map(num=> {
-        return(num=="M"?0:1);
+        return(num==0?0:1);
     }).reduce((total,num)=>total+num);
 }
 updateRuns=()=>{
     var teamone =document.getElementById("team1round").children;
     var teamTwo =document.getElementById("team2round").children;
+    var color=["red","green"];
     team1.runs.forEach((runs,index)=>{
-        teamone[index].textContent=runs;
+        teamone[index].style.background=color[runs];
     })
     team2.runs.forEach((runs,index)=>{
-        teamTwo[index].textContent=runs;
+        teamTwo[index].style.background=color[runs];
     })
 }
 timeRefresh=(timeoutPeriod)=>{
     setTimeout("location.reload(true);", timeoutPeriod);
 }
-
